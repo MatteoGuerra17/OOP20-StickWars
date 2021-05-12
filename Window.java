@@ -1,7 +1,5 @@
 package model;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-
 import javax.swing.*;
 
 public class Window extends Canvas {

@@ -1,11 +1,7 @@
 package model;
 
 import java.awt.*;
-import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.swing.JFrame;
 
 public class Gioco extends Canvas implements Runnable{
 	//
@@ -22,15 +18,14 @@ public class Gioco extends Canvas implements Runnable{
 		resLoader();
 		this.running = true;
 		new Window( WIDTH, HEIGHT, NAME, this);
+		
+		Thread thread = new Thread(this);
+		thread.start();
 	}
 
 	public static void main(String args[]) {
 		
-		Gioco gioco = new Gioco();
-		
-		Thread thread = new Thread(gioco);
-		thread.start();
-		
+		new Gioco();
 	}
 	
 	public void run() {
