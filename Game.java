@@ -13,7 +13,7 @@ public class Game extends Canvas implements Runnable{
 	private static final String NAME = "StickWars";
 	private boolean running = false;
 	private BufferedImage sfondo;
-	public State gameState = State.Game;
+	public State gameState = State.Menu;
 	private Thread thread;
 	
 	public Game() {
@@ -62,8 +62,8 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		
 		if(this.gameState == State.Menu ) {
-			g.setColor(Color.black);	//riguarda sta parte
-			
+			g.setColor(Color.black);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
 		} else {
 			g.drawImage(this.sfondo, 0, 0, WIDTH, HEIGHT, this);
 		}
