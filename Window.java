@@ -6,7 +6,7 @@ public class Window extends Canvas {
 
 	private static final long serialVersionUID = -1930025309110276219L;
 	//	
-	public Window(int width, int height, String name, Gioco gioco) {
+	public Window(int width, int height, String name, Game gioco) {
 		
 		
 		
