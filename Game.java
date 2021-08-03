@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
+
 public class Game extends Canvas implements Runnable{
 	//
 	private static final long serialVersionUID = -3269829814542667897L;
@@ -12,7 +14,7 @@ public class Game extends Canvas implements Runnable{
 	private final int height = this.width / 16 * 9;					//rapporto 16:9
 	private static final String NAME = "StickWars";
 	private boolean running = false;
-	private BufferedImage sfondo;
+	private Image sfondo;
 	public State gameState = State.Menu;
 	private Thread thread;
 	private Menu menu;
@@ -112,8 +114,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private void resLoader() {
 		
-		ImageLoader loader = new ImageLoader();
-		this.sfondo = loader.imageLoader("/immagini/land.png");
+		this.sfondo = new ImageIcon(this.getClass().getResource("/land.png")).getImage();
 	}
 	
 	public int getWidth() {
