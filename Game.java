@@ -22,18 +22,12 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		
 		resLoader();
-		this.running = true;
-//		if(this.gameState == State.Menu) {
-//			new MenuWindow(this.width, this.height);
-//		}else {
-			new Window( this.width, this.height, NAME, this);
-//		}
+		new Window( this.width, this.height, NAME, this);
 		
 		this.menu = new Menu(this);
 		this.addMouseListener(menu);
 		
-		this.thread = new Thread(this);
-		thread.start();
+		
 	}
 
 	public static void main(String args[]) {
@@ -42,6 +36,8 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void start() {
+		this.thread = new Thread(this);
+		thread.start();
 		this.running = true;
 	}
 	
@@ -105,6 +101,7 @@ public class Game extends Canvas implements Runnable{
 			menu.render(g);
 			
 		} else {
+			g.clearRect(0,0, this.width, this.height);
 			g.drawImage(this.sfondo, 0, 0, this.width, this.height, this);
 		}
 		g.dispose();
