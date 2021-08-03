@@ -8,19 +8,27 @@ public class Game extends Canvas implements Runnable{
 	//
 	private static final long serialVersionUID = -3269829814542667897L;
 	//
-	private static final int WIDTH = 1280;
-	private static final int HEIGHT = WIDTH / 16 * 9;					//rapporto 16:9
+	private final int width = 1280;
+	private final int height = this.width / 16 * 9;					//rapporto 16:9
 	private static final String NAME = "StickWars";
 	private boolean running = false;
 	private BufferedImage sfondo;
 	public State gameState = State.Menu;
 	private Thread thread;
+	private Menu menu;
 	
 	public Game() {
 		
 		resLoader();
 		this.running = true;
-		new Window( WIDTH, HEIGHT, NAME, this);
+//		if(this.gameState == State.Menu) {
+//			new MenuWindow(this.width, this.height);
+//		}else {
+			new Window( this.width, this.height, NAME, this);
+//		}
+		
+		this.menu = new Menu(this);
+		this.addMouseListener(menu);
 		
 		this.thread = new Thread(this);
 		thread.start();
@@ -40,18 +48,46 @@ public class Game extends Canvas implements Runnable{
 			thread.join();
 			this.running = false;
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
 	public void run() {
-		while(this.running) {
-			render();
-		}
-	}
+        this.requestFocus(); //don't have to click every time to have access to keyboard inputs
+        long lastLoopTime = System.nanoTime();
+        double amountOFTicks = 60.0;
+        double ns = 1000000000 / amountOFTicks;
+        long timer = System.currentTimeMillis();
+        int frames = 0;
+        double delta = 0;
+        while(running){
+            long now = System.nanoTime();
+            delta += (now - lastLoopTime) / ns;
+            lastLoopTime = now;
+            while (delta >= 1) {
+                tick();
+                delta--;
+            }
+            if (running) {
+                render();
+            }
+            frames++;
+
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                System.out.println("FPS: " + frames);
+                frames = 0; 
+            }
+        }
+        stop();
+    }
 	
+	private void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
@@ -63,18 +99,37 @@ public class Game extends Canvas implements Runnable{
 		
 		if(this.gameState == State.Menu ) {
 			g.setColor(Color.black);
-			g.fillRect(0, 0, WIDTH, HEIGHT);
+			g.fillRect(0, 0, this.width, this.height);
+			menu.render(g);
+			
 		} else {
-			g.drawImage(this.sfondo, 0, 0, WIDTH, HEIGHT, this);
+			g.drawImage(this.sfondo, 0, 0, this.width, this.height, this);
 		}
 		g.dispose();
 		bs.show();
+		
 	}
 	
 	private void resLoader() {
 		
 		ImageLoader loader = new ImageLoader();
 		this.sfondo = loader.imageLoader("/immagini/land.png");
+	}
+	
+	public int getWidth() {
+		return this.width;
+	}
+	
+	public int getHeight() {
+		return this.height;
+	}
+	
+	public State setState(State s) {
+		return this.gameState = s;
+	}
+	
+	public State getState() {
+		return this.gameState;
 	}
 	
 }
