@@ -40,7 +40,7 @@ public class Menu extends MouseAdapter{
 			}
 		
 			if(check(this.xMouse, this.yMouse, this.xQuitBtn, this.yQuitBtn, this.widthQuitBtn, this.heightQuitBtn)) {
-				System.exit(1);
+				game.stop();
 			}
 		}
 	}
