@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
+import entity.Spawn;
+
 public class Game extends Canvas implements Runnable{
 	//
 	private static final long serialVersionUID = -3269829814542667897L;
@@ -18,21 +20,18 @@ public class Game extends Canvas implements Runnable{
 	public State gameState = State.Menu;
 	private Thread thread;
 	private Menu menu;
+	private Spawn spawner;
+	private Handler handler;
 	
 	public Game() {
+		handler = new Handler();
 		
 		resLoader();
 		new Window( this.width, this.height, NAME, this);
 		
+		spawner = new Spawn(handler, this);
 		this.menu = new Menu(this);
 		this.addMouseListener(menu);
-		
-		
-	}
-
-	public static void main(String args[]) {
-		
-		new Game();
 	}
 	
 	public void start() {
@@ -82,8 +81,10 @@ public class Game extends Canvas implements Runnable{
     }
 	
 	private void tick() {
-		// TODO Auto-generated method stub
-		
+		if(this.gameState == State.Game ) {
+			handler.tick();
+			spawner.tick();
+		}
 	}
 
 	public void render() {
@@ -103,15 +104,26 @@ public class Game extends Canvas implements Runnable{
 		} else {
 			g.clearRect(0,0, this.width, this.height);
 			g.drawImage(this.sfondo, 0, 0, this.width, this.height, this);
+			handler.render(g);
+			
 		}
 		g.dispose();
-		bs.show();
-		
+		bs.show();	
 	}
 	
-	private void resLoader() {
-		
+	private void resLoader() {	
 		this.sfondo = new ImageIcon(this.getClass().getResource("/land.png")).getImage();
+	}
+	
+	public float clamp(float value, float min, float max) {
+		if (value >= max) {
+			return max;
+		}
+		if (value <= min) {
+			return min;
+		}else {
+			return value;
+		}
 	}
 	
 	public int getWidth() {
@@ -128,6 +140,10 @@ public class Game extends Canvas implements Runnable{
 	
 	public State getState() {
 		return this.gameState;
+	}
+	
+	public static void main(String args[]) {
+		new Game();
 	}
 	
 }
