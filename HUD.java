@@ -2,27 +2,25 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class HUD {
-	public float health;
+    
 	private int score = 0;
-	private int level = 1;
+	private Rectangle AlliedBar = new Rectangle(Game.getWidth1() / 30, (int) ( Game.getHeight1() * 0.58), (int) (Game.getWidth1()* 0.09), (int) ( Game.getHeight1() * 0.021 ));
+	private Rectangle EnemyBar = new Rectangle((int) (Game.getWidth1() / 1.14), (int) ( Game.getHeight1() * 0.58) , (int) (Game.getWidth1()* 0.09), (int) ( Game.getHeight1() * 0.021 ));
 	
 	
-	public void tick() {	
-		//health = Game.clamp(health, 0, 100);
+	public void incrementScore() {	
 		score++;
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.gray);
-		g.fillRect(15, 15, 200, 30);
-		g.setColor(new Color(100, 255, 0));
-		g.fillRect(15, 15, (int)health * 2, 30);
-		g.setColor(Color.white);
-		g.drawRect(15, 15, 200, 32);//border
+		this.renderTowerLifeBar(g);
+		g.setColor(Color.black);
 		g.drawString("Score : " + score, 15, 64);
-		g.drawString("Level : " + level, 15, 80);
+		
+		
 	}
 	
 	public void setScore(int score) {
@@ -33,11 +31,19 @@ public class HUD {
 		return score;
 	}
 	
-	public int getLevel() {
-		return level;
-	}
-	
-	public void setLevel(int level) {
-		this.level = level;
+	public void renderTowerLifeBar(Graphics g) {
+	    //Draw the life-bars of the towers
+	    //Draw the life bar of the allied tower
+	    g.setColor(Color.red);
+            g.fillRect((int) this.AlliedBar.getX(), (int) this.AlliedBar.getY() , (int) this.AlliedBar.getWidth() , (int) this.AlliedBar.getHeight());
+            //Draw a border
+            g.setColor(Color.white);
+            g.drawRect((int) this.AlliedBar.getX(), (int) this.AlliedBar.getY() , (int) this.AlliedBar.getWidth() , (int) this.AlliedBar.getHeight());
+            //Draw the life bar of the enemy tower
+            g.setColor(Color.red);
+            g.fillRect((int) this.EnemyBar.getX(), (int) this.EnemyBar.getY() , (int) this.EnemyBar.getWidth() , (int) this.EnemyBar.getHeight());
+            //Draw a border
+            g.setColor(Color.white);
+            g.drawRect((int) this.EnemyBar.getX(), (int) this.EnemyBar.getY() , (int) this.EnemyBar.getWidth() , (int) this.EnemyBar.getHeight());
 	}
 }

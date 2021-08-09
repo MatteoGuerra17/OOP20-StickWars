@@ -12,11 +12,10 @@ public abstract class GameObject {
 	protected float velX, velY;
 	protected Menu menu;
 	
-	public GameObject(float x, float y, ID id, Menu menu) {
+	public GameObject(float x, float y, ID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
-		this.menu = menu;
 	}
 	
 	public abstract void tick();
