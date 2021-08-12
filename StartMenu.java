@@ -65,19 +65,18 @@ public class StartMenu extends MouseAdapter{
 		
 		g.setColor(Color.red);
 		g.setFont(font);
-		g.drawString("Menu", game.getWidth()/10 + 3*(game.getWidth()/10) , game.getHeight()/14 + game.getHeight()/14);
+		g.drawString("Menu", game.getWidth()/128 + 49*(game.getWidth()/128), game.getHeight()/128 + 30*(game.getHeight()/128));
 		
 		g.setColor(Color.white);
 		g.setFont(font2);
 		g.drawRect(this.xPlayBtn, this.yPlayBtn, this.widthPlayBtn, this.heightPlayBtn);
-		g.drawString("Play", game.getWidth()/128 + 57*(game.getWidth()/128), game.getHeight()/14 + 4*(game.getHeight()/14));
-		//controlla width stringa
+		g.drawString("Play", game.getWidth()/128 + 59*(game.getWidth()/128), game.getHeight()/128 + 60*(game.getHeight()/128));
 		
 		g.drawRect(this.xMenuBtn, this.yMenuBtn, this.widthMenuBtn, this.heightMenuBtn);
-		g.drawString("Menu", game.getWidth()/128 + 56*(game.getWidth()/128), game.getHeight()/15 + 8*(game.getHeight()/15));
+		g.drawString("Tutorial", game.getWidth()/128 + 53*(game.getWidth()/128), game.getHeight()/128 + 102*(game.getHeight()/128));
 		
 		g.drawRect(this.xQuitBtn, this.yQuitBtn, this.widthQuitBtn, this.heightQuitBtn);
-		g.drawString("Quit", game.getWidth()/128 + 57*(game.getWidth()/128), game.getHeight()/14 + 11*(game.getHeight()/14));
+		g.drawString("Quit", game.getWidth()/128 + 59*(game.getWidth()/128), game.getHeight()/128 + 142*(game.getHeight()/128));
 	}
 	
 }
