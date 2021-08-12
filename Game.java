@@ -78,6 +78,7 @@ public class Game extends Canvas implements Runnable{
                     frames = 0; 
                 }
             }
+            System.exit(1);
         }
 	
 	private void tick() {
