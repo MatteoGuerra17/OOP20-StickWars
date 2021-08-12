@@ -11,8 +11,8 @@ import model.HUD;
 import model.GameObject;
 
 public class AlliedTower extends GameObject{
-   
-    private Rectangle bounds = new Rectangle(Game.getWidth1() / 20, (int) (Game.getHeight1() / 2.55), Game.getWidth1() / 17 , (int) (Game.getHeight1() / 5.8));
+
+	private Rectangle bounds = new Rectangle(Game.WIDTH / 20, (int) (Game.HEIGHT / 2.55), Game.WIDTH / 17 , (int) (Game.HEIGHT / 5.8));
     private float lifePoints = 10_000;
     
     
@@ -24,8 +24,8 @@ public class AlliedTower extends GameObject{
 //            this.lifePoints = (int) (this.lifePoints * 0.8);
 //        }
     }
-
-    @Override
+    
+	@Override
     public void tick() {
 //        if (this.lifePoints <= this.lifePoints / 3) {
 //            

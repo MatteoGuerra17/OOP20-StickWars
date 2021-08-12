@@ -23,8 +23,8 @@ public class Spawn {
 		//	hud.setLevel(hud.getLevel() + 1);
 			handler.addObject(new Goblin(game.getWidth() - 64, game.getHeight() / 2, ID.Goblin));
 		}
-		handler.addObject(new AlliedTower(Game.getWidth1() / 20, (int) (Game.getHeight1() / 2.55), ID.AlliedTower, new HUD()));
-		handler.addObject(new Arch(Game.getWidth1() / 16, (int) (Game.getHeight1() / 3), ID.Arch));
+		handler.addObject(new AlliedTower(Game.WIDTH / 20, (int) (Game.HEIGHT / 2.55), ID.AlliedTower, new HUD()));
+		handler.addObject(new Arch(Game.WIDTH / 16, (int) (Game.HEIGHT / 3), ID.Arch));
 		
 //		System.out.println("larghezza nonstatic: " + game.getWidth() + "  larghezza static: " + Game.getWidth1());
 //		System.out.println("altezza nonstatic: " + game.getHeight() + "  altezza static: " + Game.getHeight1());

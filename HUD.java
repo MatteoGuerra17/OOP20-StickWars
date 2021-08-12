@@ -7,8 +7,8 @@ import java.awt.Rectangle;
 public class HUD {
     
 	private int score = 0;
-	private Rectangle AlliedBar = new Rectangle(Game.getWidth1() / 30, (int) ( Game.getHeight1() * 0.58), (int) (Game.getWidth1()* 0.09), (int) ( Game.getHeight1() * 0.021 ));
-	private Rectangle EnemyBar = new Rectangle((int) (Game.getWidth1() / 1.14), (int) ( Game.getHeight1() * 0.58) , (int) (Game.getWidth1()* 0.09), (int) ( Game.getHeight1() * 0.021 ));
+	private Rectangle AlliedBar = new Rectangle(Game.WIDTH / 30, (int) ( Game.HEIGHT * 0.58), (int) (Game.WIDTH * 0.09), (int) ( Game.HEIGHT * 0.021 ));
+	private Rectangle EnemyBar = new Rectangle((int) (Game.WIDTH / 1.14), (int) ( Game.HEIGHT * 0.58) , (int) (Game.WIDTH * 0.09), (int) ( Game.HEIGHT  * 0.021 ));
 	
 	
 	public void incrementScore() {	
