@@ -12,8 +12,8 @@ public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -3269829814542667897L;
 	//
 	final static Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-	private final static int width = (int) screen.getWidth() * 3/4;
-        private final static int height = width * 9 / 16;					//rapporto 16:9
+	public static final int WIDTH = (int) screen.getWidth() * 3/4;
+    public static final int HEIGHT = WIDTH * 9 / 16;					//rapporto 16:9
 	private static final String NAME = "StickWars";
 	private boolean running = false;
 	private Image sfondo;
@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		this.hud = new HUD();
 		resLoader();
-		new Window( Game.width, Game.height, NAME, this);
+		new Window( WIDTH, HEIGHT, NAME, this);
 		
 		this.spawner = new Spawn(handler, this);
 		this.menu = new Menu(this);
@@ -98,12 +98,12 @@ public class Game extends Canvas implements Runnable{
 		
 		if(this.gameState == State.Menu ) {
 			g.setColor(Color.black);
-			g.fillRect(0, 0, Game.width, Game.height);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
 			menu.render(g);
 			
 		} else {
-			g.clearRect(0,0, Game.width, Game.height);
-			g.drawImage(this.sfondo, 0, 0, Game.width, Game.height, this);
+			g.clearRect(0,0, WIDTH, HEIGHT);
+			g.drawImage(this.sfondo, 0, 0, WIDTH, HEIGHT, this);
 			handler.render(g);
 			hud.render(g);
 			
@@ -114,7 +114,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private void resLoader() {
 		
-		this.sfondo = new ImageIcon(this.getClass().getResource("/land.png")).getImage();
+		this.sfondo = new ImageIcon(this.getClass().getResource("/land.jpg")).getImage();
 	}
 	
 	public float clamp(float value, float min, float max) {
@@ -127,15 +127,7 @@ public class Game extends Canvas implements Runnable{
 			return value;
 		}
 	}
-	
-	public static int getWidth1() {
-		return width;
-	}
-	
-	public static int getHeight1() {
-		return height;
-	}
-	
+		
 	public State setState(State s) {
 		return this.gameState = s;
 	}
