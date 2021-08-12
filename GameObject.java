@@ -1,9 +1,9 @@
-package entity;
+package model;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import model.Menu;
+import entity.ID;
 
 public abstract class GameObject {
 
