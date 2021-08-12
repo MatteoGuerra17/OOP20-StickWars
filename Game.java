@@ -11,8 +11,9 @@ public class Game extends Canvas implements Runnable{
 	//
 	private static final long serialVersionUID = -3269829814542667897L;
 	//
-	private final int width = 1280;
-	private final int height = this.width / 16 * 9;					//rapporto 16:9
+	final static Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	private final static int width = (int) screen.getWidth() * 3/4;
+        private final static int height = width * 9 / 16;					//rapporto 16:9
 	private static final String NAME = "StickWars";
 	private boolean running = false;
 	private Image sfondo;
@@ -21,12 +22,13 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	private Spawn spawner;
 	private Handler handler;
+	private HUD hud;
 	
 	public Game() {
 		handler = new Handler();
-		
+		this.hud = new HUD();
 		resLoader();
-		new Window( this.width, this.height, NAME, this);
+		new Window( Game.width, Game.height, NAME, this);
 		
 		this.spawner = new Spawn(handler, this);
 		this.menu = new Menu(this);
@@ -35,6 +37,7 @@ public class Game extends Canvas implements Runnable{
 
 	public void start() {
 		this.thread = new Thread(this);
+		//System.out.println("alt: " + height + "  largh: " + width);
 		thread.start();
 		this.running = true;
 	}
@@ -49,33 +52,33 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void run() {
-        this.requestFocus(); //don't have to click every time to have access to keyboard inputs
-        long lastLoopTime = System.nanoTime();
-        double amountOFTicks = 60.0;
-        double ns = 1000000000 / amountOFTicks;
-        long timer = System.currentTimeMillis();
-        int frames = 0;
-        double delta = 0;
-        while(running){
-            long now = System.nanoTime();
-            delta += (now - lastLoopTime) / ns;
-            lastLoopTime = now;
-            while (delta >= 1) {
-                tick();
-                delta--;
-            }
-            if (running) {
-                render();
-            }
-            frames++;
-
-            if (System.currentTimeMillis() - timer > 1000) {
-                timer += 1000;
-                System.out.println("FPS: " + frames);
-                frames = 0; 
+            this.requestFocus(); //don't have to click every time to have access to keyboard inputs
+            long lastLoopTime = System.nanoTime();
+            double amountOFTicks = 60.0;
+            double ns = 1000000000 / amountOFTicks;
+            long timer = System.currentTimeMillis();
+            int frames = 0;
+            double delta = 0;
+            while(running){
+                long now = System.nanoTime();
+                delta += (now - lastLoopTime) / ns;
+                lastLoopTime = now;
+                while (delta >= 1) {
+                    tick();
+                    delta--;
+                }
+                if (running) {
+                    render();
+                }
+                frames++;
+    
+                if (System.currentTimeMillis() - timer > 1000) {
+                    timer += 1000;
+                    System.out.println("FPS: " + frames);
+                    frames = 0; 
+                }
             }
         }
-    }
 	
 	private void tick() {
 		if(this.gameState == State.Game ) {
@@ -95,13 +98,14 @@ public class Game extends Canvas implements Runnable{
 		
 		if(this.gameState == State.Menu ) {
 			g.setColor(Color.black);
-			g.fillRect(0, 0, this.width, this.height);
+			g.fillRect(0, 0, Game.width, Game.height);
 			menu.render(g);
 			
 		} else {
-			g.clearRect(0,0, this.width, this.height);
-			g.drawImage(this.sfondo, 0, 0, this.width, this.height, this);
+			g.clearRect(0,0, Game.width, Game.height);
+			g.drawImage(this.sfondo, 0, 0, Game.width, Game.height, this);
 			handler.render(g);
+			hud.render(g);
 			
 		}
 		g.dispose();
@@ -124,12 +128,12 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
-	public int getWidth() {
-		return this.width;
+	public static int getWidth1() {
+		return width;
 	}
 	
-	public int getHeight() {
-		return this.height;
+	public static int getHeight1() {
+		return height;
 	}
 	
 	public State setState(State s) {
