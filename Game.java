@@ -19,7 +19,7 @@ public class Game extends Canvas implements Runnable{
 	private Image sfondo;
 	public State gameState = State.Menu;
 	private Thread thread;
-	private Menu menu;
+	private StartMenu startMenu;
 	private Spawn spawner;
 	private Handler handler;
 	private HUD hud;
@@ -31,8 +31,8 @@ public class Game extends Canvas implements Runnable{
 		new Window( WIDTH, HEIGHT, NAME, this);
 		
 		this.spawner = new Spawn(handler, this);
-		this.menu = new Menu(this);
-		this.addMouseListener(menu);
+		this.startMenu = new StartMenu(this);
+		this.addMouseListener(startMenu);
 	}
 
 	public void start() {
@@ -100,7 +100,7 @@ public class Game extends Canvas implements Runnable{
 		if(this.gameState == State.Menu ) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
-			menu.render(g);
+			startMenu.render(g);
 			
 		} else {
 			g.clearRect(0,0, WIDTH, HEIGHT);
