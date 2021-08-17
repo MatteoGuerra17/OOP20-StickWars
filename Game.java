@@ -20,6 +20,7 @@ public class Game extends Canvas implements Runnable{
 	public State gameState = State.Menu;
 	private Thread thread;
 	private StartMenu startMenu;
+	private Menu menu;
 	private Spawn spawner;
 	private Handler handler;
 	private HUD hud;
@@ -27,6 +28,7 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		this.handler = new Handler();
 		this.hud = new HUD();
+		this.menu = new Menu();
 		resLoader();
 		new Window( WIDTH, HEIGHT, NAME, this);
 		
@@ -44,8 +46,8 @@ public class Game extends Canvas implements Runnable{
 	
 	public void stop() {
 		try {
-		        this.running = false;
-		        thread.join();
+		    this.running = false;
+		    thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -105,9 +107,9 @@ public class Game extends Canvas implements Runnable{
 		} else {
 			g.clearRect(0,0, WIDTH, HEIGHT);
 			g.drawImage(this.sfondo, 0, 0, WIDTH, HEIGHT, this);
-			handler.render(g);
-			hud.render(g);
-			
+			this.handler.render(g);
+			this.hud.render(g);
+			this.menu.render(g);
 		}
 		g.dispose();
 		bs.show();	
