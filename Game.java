@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable{
 	private HUD hud;
 	
 	public Game() {
-		handler = new Handler();
+		this.handler = new Handler();
 		this.hud = new HUD();
 		resLoader();
 		new Window( WIDTH, HEIGHT, NAME, this);
