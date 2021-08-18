@@ -1,13 +1,15 @@
 package model;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.ImageIcon;
 
 import entity.Spawn;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable, MouseListener{
 	//
 	private static final long serialVersionUID = -3269829814542667897L;
 	//
@@ -17,7 +19,7 @@ public class Game extends Canvas implements Runnable{
 	private static final String NAME = "StickWars";
 	private boolean running = false;
 	private Image sfondo;
-	public State gameState = State.Menu;
+	public State gameState = State.StartMenu;
 	private Thread thread;
 	private StartMenu startMenu;
 	private Menu menu;
@@ -99,7 +101,7 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		
-		if(this.gameState == State.Menu ) {
+		if(this.gameState == State.StartMenu ) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			startMenu.render(g);
@@ -141,6 +143,36 @@ public class Game extends Canvas implements Runnable{
 	
 	public static void main(String args[]) {
 		new Game();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

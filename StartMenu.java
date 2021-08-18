@@ -40,7 +40,7 @@ public class StartMenu extends MouseAdapter{
 		this.xMouse = e.getX();
 		this.yMouse = e.getY();
 		
-		if(this.game.getState() == State.Menu) {
+		if(this.game.getState() == State.StartMenu) {
 			if(check(this.xMouse, this.yMouse, this.xPlayBtn, this.yPlayBtn, this.widthPlayBtn, this.heightPlayBtn)) {
 				this.game.setState(State.Game);
 			}
