@@ -4,12 +4,24 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Menu {
+	
+	private int x, y, width, height;
+	
+	public Menu(int x, int y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
+
+	
 
 	public void render(Graphics g) {
 		g.setColor(Color.black);
-		g.fillRect(800, 50, 100, 50);
+		g.fillRect(this.x, this.y, this.width, this.height);
+		
 		g.setColor(Color.white);
-		g.drawRect(800, 50, 100, 50);
+		g.drawRect(this.x, this.y, this.width, this.height); //border
 	}
 	
 }
