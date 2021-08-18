@@ -26,17 +26,22 @@ public class Game extends Canvas implements Runnable, MouseListener{
 	private Spawn spawner;
 	private Handler handler;
 	private HUD hud;
+	private int xMouse, yMouse;
+	private int x = 800;
+	private int y = 50;
+	private int width = 100;
+	private int height = 50;
 	
 	public Game() {
 		this.handler = new Handler();
 		this.hud = new HUD();
-		this.menu = new Menu();
 		resLoader();
 		new Window( WIDTH, HEIGHT, NAME, this);
 		
 		this.spawner = new Spawn(handler, this);
 		this.startMenu = new StartMenu(this);
 		this.addMouseListener(startMenu);
+		this.menu = new Menu(this.x, this.y, this.width, this.height);
 	}
 
 	public void start() {
@@ -147,31 +152,40 @@ public class Game extends Canvas implements Runnable, MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		this.xMouse = e.getX();
+		this.yMouse = e.getY();
 		
+		if(check(xMouse, yMouse, this.x, this.y, this.width, this.height)) {
+			this.gameState = State.Menu;
+		}
+	}
+	
+	private boolean check(int xM, int yM, int x, int y, int width, int height) {
+		if(xM > x && xM < x + width) {
+			if(yM > y && yM < y + height) {
+				return true;
+			}
+		}		
+		return false;
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	
