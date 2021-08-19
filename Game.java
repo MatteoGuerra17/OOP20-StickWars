@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable, MouseListener{
 		new Window( WIDTH, HEIGHT, NAME, this);
 		
 		this.spawner = new Spawn(handler, this);
-		this.startMenu = new StartMenu(this);
+		this.startMenu = new StartMenu(this, NAME);
 		this.addMouseListener(startMenu);
 		this.menu = new Menu(this.x, this.y, this.width, this.height);
 		this.addMouseListener(this);
