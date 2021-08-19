@@ -42,6 +42,7 @@ public class Game extends Canvas implements Runnable, MouseListener{
 		this.startMenu = new StartMenu(this);
 		this.addMouseListener(startMenu);
 		this.menu = new Menu(this.x, this.y, this.width, this.height);
+		this.addMouseListener(this);
 	}
 
 	public void start() {
@@ -101,22 +102,32 @@ public class Game extends Canvas implements Runnable, MouseListener{
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
 			this.createBufferStrategy(2);
-			return;
+			return ;
 		}
 		
 		Graphics g = bs.getDrawGraphics();
 		
 		if(this.gameState == State.StartMenu ) {
+			
 			g.setColor(Color.black);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
-			startMenu.render(g);
+			this.startMenu.render(g);
+			
+		} else if(this.gameState == State.Menu){
+			
+			g.clearRect(0,0, WIDTH, HEIGHT);
+			g.setColor(Color.cyan);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+			this.menu.render(g);
 			
 		} else {
+			
 			g.clearRect(0,0, WIDTH, HEIGHT);
 			g.drawImage(this.sfondo, 0, 0, WIDTH, HEIGHT, this);
 			this.handler.render(g);
 			this.hud.render(g);
-			this.menu.render(g);
+			this.menu.button(g);
+			
 		}
 		g.dispose();
 		bs.show();	
@@ -160,8 +171,8 @@ public class Game extends Canvas implements Runnable, MouseListener{
 		this.xMouse = e.getX();
 		this.yMouse = e.getY();
 		
-		if(check(xMouse, yMouse, this.x, this.y, this.width, this.height)) {
-			this.gameState = State.Menu;
+		if(this.check(xMouse, yMouse, this.x, this.y, this.width, this.height)) {
+			this.setState(State.Menu);
 		}
 	}
 	

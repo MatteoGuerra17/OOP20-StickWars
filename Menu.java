@@ -16,12 +16,18 @@ public class Menu {
 
 	
 
-	public void render(Graphics g) {
+	public void button(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(this.x, this.y, this.width, this.height);
 		
 		g.setColor(Color.white);
 		g.drawRect(this.x, this.y, this.width, this.height); //border
+	}
+
+
+
+	public void render(Graphics g) {
+				
 	}
 	
 }
